@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>commit-template-idea-plugin</id>
+    <name>Git Commit Template</name>
+    <version>1.0.0</version>
+
+    <vendor email="damien.arrachequesne@gmail.com" />
+
+    <description><![CDATA[
+        <p>Create a commit message with the following template:</p>
+
+        <pre>
+        &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+        &lt;BLANK LINE&gt;
+        &lt;body&gt;
+        &lt;BLANK LINE&gt;
+        &lt;footer&gt;
+        </pre>
+    ]]></description>
+
+    <idea-version since-build="145.0"/>
+
+    <depends>com.intellij.modules.vcs</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <action id="Commit.Button" class="com.leroymerlin.commit.CreateCommitAction"
+                text="Create commit message"
+                description="Create commit message"
+                icon="PluginIcons.LOAD">
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+        </action>
+    </actions>
+
+</idea-plugin>
