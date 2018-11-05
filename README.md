@@ -3,7 +3,7 @@
 This plugin allows to create a commit message with the following template:
 
 ```
-<type>(<scope>): <subject>
+<type>(<scope>): <subject> [<issue no>]
 <BLANK LINE>
 <body>
 <BLANK LINE>

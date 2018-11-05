@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>commit-template-idea-plugin</id>
     <name>Git Commit Template</name>
-    <version>1.0.0</version>
+    <version>1.1.2</version>
 
     <vendor email="damien.arrachequesne@gmail.com" />
 
@@ -9,7 +9,7 @@
         <p>Create a commit message with the following template:</p>
 
         <pre>
-        &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+        &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; [&lt;issue no&gt;]
         &lt;BLANK LINE&gt;
         &lt;body&gt;
         &lt;BLANK LINE&gt;

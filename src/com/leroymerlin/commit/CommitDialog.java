@@ -30,13 +30,21 @@ public class CommitDialog extends DialogWrapper {
     }
 
     String getCommitMessage() {
-        return String.format("%s%s: %s%n%n%s%s%s",
+        return String.format("%s%s: %s%s%n%n%s%s%s",
                 panel.getChangeType(),
                 (panel.getChangeScope().isEmpty()?"":String.format("(%s)", panel.getChangeScope())),
                 panel.getShortDescription(),
+                getIssueNo(),
                 getLongDescription(),
                 getBreakingChanges(),
                 getClosedIssues());
+    }
+
+    private String getIssueNo() {
+        if (isBlank(panel.getIssueNo())) {
+            return "";
+        }
+        return String.format(" [%s]", panel.getIssueNo());
     }
 
     private String getLongDescription() {

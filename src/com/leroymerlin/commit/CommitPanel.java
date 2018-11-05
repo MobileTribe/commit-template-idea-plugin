@@ -12,6 +12,7 @@ public class CommitPanel {
     private JComboBox changeType;
     private JTextField changeScope;
     private JTextField shortDescription;
+    private JTextField issueNo;
     private JTextArea longDescription;
     private JTextField closedIssues;
     private JTextField breakingChanges;
@@ -37,6 +38,10 @@ public class CommitPanel {
 
     String getShortDescription() {
         return shortDescription.getText().trim();
+    }
+
+    String getIssueNo() {
+        return issueNo.getText().trim();
     }
 
     String getLongDescription() {
