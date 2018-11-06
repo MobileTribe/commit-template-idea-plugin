@@ -26,28 +26,15 @@ public class CommitPanel {
         return mainPanel;
     }
 
-    String getChangeType() {
-        ChangeType type = (ChangeType) changeType.getSelectedItem();
-        return type.label();
+    CommitMessage getCommitMessage() {
+        return new CommitMessage(
+                (ChangeType) changeType.getSelectedItem(),
+                changeScope.getText().trim(),
+                shortDescription.getText().trim(),
+                longDescription.getText().trim(),
+                breakingChanges.getText().trim(),
+                closedIssues.getText().trim()
+        );
     }
 
-    String getChangeScope() {
-        return changeScope.getText().trim();
-    }
-
-    String getShortDescription() {
-        return shortDescription.getText().trim();
-    }
-
-    String getLongDescription() {
-        return longDescription.getText().trim();
-    }
-
-    String getBreakingChanges() {
-        return breakingChanges.getText().trim();
-    }
-
-    String getClosedIssues() {
-        return closedIssues.getText().trim();
-    }
 }
