@@ -32,8 +32,8 @@ public class CommitPanel {
                 changeScope.getText().trim(),
                 shortDescription.getText().trim(),
                 longDescription.getText().trim(),
-                breakingChanges.getText().trim(),
-                closedIssues.getText().trim()
+                closedIssues.getText().trim(),
+                breakingChanges.getText().trim()
         );
     }
 
