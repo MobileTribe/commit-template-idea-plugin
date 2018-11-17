@@ -16,7 +16,7 @@ public class CommitPanel {
     private JTextField shortDescription;
     private JTextArea longDescription;
     private JTextField closedIssues;
-    private JTextField breakingChanges;
+    private JTextArea breakingChanges;
 
     CommitPanel(Project project) {
         for (ChangeType type : ChangeType.values()) {

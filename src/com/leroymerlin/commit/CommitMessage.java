@@ -1,11 +1,14 @@
 package com.leroymerlin.commit;
 
+import org.apache.commons.lang.WordUtils;
+
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 /**
  * @author Damien Arrachequesne <damien.arrachequesne@gmail.com>
  */
 class CommitMessage {
+    private static final int MAX_LINE_LENGTH = 72; // https://stackoverflow.com/a/2120040/5138796
     private final String content;
 
     CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String closedIssues, String breakingChanges) {
@@ -26,14 +29,13 @@ class CommitMessage {
                 .append(shortDescription)
                 .append(System.lineSeparator())
                 .append(System.lineSeparator())
-                .append(breakLines(longDescription, 100));
+                .append(WordUtils.wrap(longDescription, MAX_LINE_LENGTH));
 
         if (isNotBlank(breakingChanges)) {
             builder
                     .append(System.lineSeparator())
                     .append(System.lineSeparator())
-                    .append("BREAKING CHANGE: ")
-                    .append(breakingChanges);
+                    .append(WordUtils.wrap("BREAKING CHANGE: " + breakingChanges, MAX_LINE_LENGTH));
         }
 
         if (isNotBlank(closedIssues)) {
@@ -47,31 +49,6 @@ class CommitMessage {
         }
 
         return builder.toString();
-    }
-
-    private static String breakLines(String input, int maxLineLength) {
-        String[] tokens = input.split("\\s+");
-        StringBuilder output = new StringBuilder(input.length());
-        int lineLength = 0;
-        for (int i = 0; i < tokens.length; i++) {
-            String word = tokens[i];
-
-            boolean shouldAddNewLine = lineLength + (" " + word).length() > maxLineLength;
-            if (shouldAddNewLine) {
-                if (i > 0) {
-                    output.append(System.lineSeparator());
-                }
-                lineLength = 0;
-            }
-            boolean shouldAddSpace = i < tokens.length - 1 &&
-                    (lineLength + (word + " ").length() + tokens[i + 1].length() <= maxLineLength);
-            if (shouldAddSpace) {
-                word += " ";
-            }
-            output.append(word);
-            lineLength += word.length();
-        }
-        return output.toString();
     }
 
     @Override
