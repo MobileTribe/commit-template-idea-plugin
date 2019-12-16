@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.CommitMessageI;
 import com.intellij.openapi.vcs.VcsDataKeys;
 import com.intellij.openapi.vcs.ui.Refreshable;
@@ -16,15 +17,24 @@ public class CreateCommitAction extends AnAction implements DumbAware {
 
     @Override
     public void actionPerformed(AnActionEvent actionEvent) {
-        final CommitMessageI commitPanel = getCommitPanel(actionEvent);
-        if (commitPanel == null)
-            return;
+        CommitMessageI commitPanel = getCommitPanel(actionEvent);
+        if (commitPanel == null) return;
 
-        CommitDialog dialog = new CommitDialog(actionEvent.getProject());
+        CommitMessage commitMessage = parseExistingCommitMessage(commitPanel);
+        CommitDialog dialog = new CommitDialog(actionEvent.getProject(), commitMessage);
         dialog.show();
+
         if (dialog.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
             commitPanel.setCommitMessage(dialog.getCommitMessage().toString());
         }
+    }
+
+    private CommitMessage parseExistingCommitMessage(CommitMessageI commitPanel) {
+        if (commitPanel instanceof CheckinProjectPanel) {
+            String commitMessageString = ((CheckinProjectPanel) commitPanel).getCommitMessage();
+            return CommitMessage.parse(commitMessageString);
+        }
+        return null;
     }
 
     @Nullable
