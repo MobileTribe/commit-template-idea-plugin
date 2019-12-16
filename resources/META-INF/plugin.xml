@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>commit-template-idea-plugin</id>
     <name>Git Commit Template</name>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <vendor email="damien.arrachequesne@gmail.com" />
 
