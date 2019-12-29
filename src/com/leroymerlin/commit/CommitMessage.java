@@ -43,7 +43,7 @@ class CommitMessage {
             for (String closedIssue : closedIssues.split(",")) {
                 builder
                         .append(System.lineSeparator())
-                        .append("Closes ")
+                        .append("Closes #")
                         .append(closedIssue);
             }
         }
