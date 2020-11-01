@@ -23,9 +23,10 @@ public class CommitPanel {
             changeType.addItem(type);
         }
         File workingDirectory = VfsUtil.virtualToIoFile(project.getBaseDir());
-        Command.Result result = new Command(workingDirectory, "git log --all --format=%s | grep -Eo '^[a-z]+(\\(.*\\)):.*$' | sed 's/^.*(\\(.*\\)):.*$/\\1/' | sort -n | uniq").execute();
+        GitLogQuery.Result result = new GitLogQuery(workingDirectory).execute();
         if (result.isSuccess()) {
-            result.getOutput().forEach(changeScope::addItem);
+            changeScope.addItem(""); // no value by default
+            result.getScopes().forEach(changeScope::addItem);
         }
     }
 
