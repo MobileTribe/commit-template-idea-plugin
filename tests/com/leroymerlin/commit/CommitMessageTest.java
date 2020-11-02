@@ -68,6 +68,20 @@ public class CommitMessageTest {
         assertEquals(null, commitMessage.getChangeType());
     }
 
+    @Test
+    public void testFormatCommit_addNumberSignIfMissing() {
+        CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "$route",
+                "add support for the `reloadOnUrl` configuration option",
+                "",
+                "", "7925, #15002 , https://github.com/o/r/issues/15003 ");
+        String expected = "feat($route): add support for the `reloadOnUrl` configuration option\n" +
+                "\n" +
+                "Closes #7925\n" +
+                "Closes #15002\n" +
+                "Closes https://github.com/o/r/issues/15003";
+        assertEquals(expected, commitMessage.toString());
+    }
+
     private void check(CommitMessage commitMessage, String output) {
         checkFormat(commitMessage, output);
         checkParse(commitMessage, output);

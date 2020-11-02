@@ -1,5 +1,6 @@
 package com.leroymerlin.commit;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 
 import java.util.regex.Matcher;
@@ -68,11 +69,16 @@ class CommitMessage {
                 builder
                         .append(System.lineSeparator())
                         .append("Closes ")
-                        .append(closedIssue);
+                        .append(formatClosedIssue(closedIssue));
             }
         }
 
         return builder.toString();
+    }
+
+    private String formatClosedIssue(String closedIssue) {
+        String trimmed = closedIssue.trim();
+        return (StringUtils.isNumeric(trimmed) ? "#" : "") + trimmed;
     }
 
     public static CommitMessage parse(String message) {

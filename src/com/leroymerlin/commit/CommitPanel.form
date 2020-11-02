@@ -80,6 +80,7 @@
         </constraints>
         <properties>
           <text value="Closed issues"/>
+          <toolTipText value="Comma-separated list of issues which are closed by this commit"/>
         </properties>
       </component>
       <component id="424ce" class="javax.swing.JComboBox" binding="changeType">
