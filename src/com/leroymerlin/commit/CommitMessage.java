@@ -20,6 +20,7 @@ class CommitMessage {
     private ChangeType changeType;
     private String changeScope, shortDescription, longDescription, breakingChanges, closedIssues;
     private boolean wrapText = true;
+    private boolean skipCI = false;
 
     private CommitMessage() {
         this.longDescription = "";
@@ -27,7 +28,8 @@ class CommitMessage {
         this.closedIssues = "";
     }
 
-    public CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String breakingChanges, String closedIssues, boolean wrapText) {
+    public CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription,
+                         String breakingChanges, String closedIssues, boolean wrapText, boolean skipCI) {
         this.changeType = changeType;
         this.changeScope = changeScope;
         this.shortDescription = shortDescription;
@@ -35,6 +37,7 @@ class CommitMessage {
         this.breakingChanges = breakingChanges;
         this.closedIssues = closedIssues;
         this.wrapText = wrapText;
+        this.skipCI = skipCI;
     }
 
     @Override
@@ -76,6 +79,13 @@ class CommitMessage {
             }
         }
 
+        if (skipCI) {
+            builder
+                    .append(System.lineSeparator())
+                    .append(System.lineSeparator())
+                    .append("[skip ci]");
+        }
+
         return builder.toString();
     }
 
@@ -104,7 +114,7 @@ class CommitMessage {
             stringBuilder = new StringBuilder();
             for (; pos < strings.length; pos++) {
                 String lineString = strings[pos];
-                if (lineString.startsWith("BREAKING") || lineString.startsWith("Closes")) break;
+                if (lineString.startsWith("BREAKING") || lineString.startsWith("Closes") || lineString.equalsIgnoreCase("[skip ci]")) break;
                 stringBuilder.append(lineString).append('\n');
             }
             commitMessage.longDescription = stringBuilder.toString().trim();
@@ -112,7 +122,7 @@ class CommitMessage {
             stringBuilder = new StringBuilder();
             for (; pos < strings.length; pos++) {
                 String lineString = strings[pos];
-                if (lineString.startsWith("Closes")) break;
+                if (lineString.startsWith("Closes") || lineString.equalsIgnoreCase("[skip ci]")) break;
                 stringBuilder.append(lineString).append('\n');
             }
             commitMessage.breakingChanges = stringBuilder.toString().trim().replace("BREAKING CHANGE: ", "");
@@ -124,6 +134,8 @@ class CommitMessage {
             }
             if (stringBuilder.length() > 0) stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
             commitMessage.closedIssues = stringBuilder.toString();
+
+            commitMessage.skipCI = message.contains("[skip ci]");
         } catch (RuntimeException e) {}
 
         return commitMessage;
@@ -151,5 +163,9 @@ class CommitMessage {
 
     public String getClosedIssues() {
         return closedIssues;
+    }
+
+    public boolean isSkipCI() {
+        return skipCI;
     }
 }

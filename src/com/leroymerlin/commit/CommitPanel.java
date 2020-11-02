@@ -18,6 +18,7 @@ public class CommitPanel {
     private JTextArea breakingChanges;
     private JTextField closedIssues;
     private JCheckBox wrapTextCheckBox;
+    private JCheckBox skipCICheckBox;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
         for (ChangeType type : ChangeType.values()) {
@@ -47,7 +48,8 @@ public class CommitPanel {
                 longDescription.getText().trim(),
                 breakingChanges.getText().trim(),
                 closedIssues.getText().trim(),
-                wrapTextCheckBox.isSelected()
+                wrapTextCheckBox.isSelected(),
+                skipCICheckBox.isSelected()
         );
     }
 
@@ -58,5 +60,6 @@ public class CommitPanel {
         longDescription.setText(commitMessage.getLongDescription());
         breakingChanges.setText(commitMessage.getBreakingChanges());
         closedIssues.setText(commitMessage.getClosedIssues());
+        skipCICheckBox.setSelected(commitMessage.isSkipCI());
     }
 }
