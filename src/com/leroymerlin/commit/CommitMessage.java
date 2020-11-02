@@ -19,6 +19,7 @@ class CommitMessage {
 
     private ChangeType changeType;
     private String changeScope, shortDescription, longDescription, breakingChanges, closedIssues;
+    private boolean wrapText = true;
 
     private CommitMessage() {
         this.longDescription = "";
@@ -26,13 +27,14 @@ class CommitMessage {
         this.closedIssues = "";
     }
 
-    public CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String breakingChanges, String closedIssues) {
+    public CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String breakingChanges, String closedIssues, boolean wrapText) {
         this.changeType = changeType;
         this.changeScope = changeScope;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
         this.breakingChanges = breakingChanges;
         this.closedIssues = closedIssues;
+        this.wrapText = wrapText;
     }
 
     @Override
@@ -53,14 +55,15 @@ class CommitMessage {
             builder
                     .append(System.lineSeparator())
                     .append(System.lineSeparator())
-                    .append(WordUtils.wrap(longDescription, MAX_LINE_LENGTH));
+                    .append(wrapText ? WordUtils.wrap(longDescription, MAX_LINE_LENGTH) : longDescription);
         }
 
         if (isNotBlank(breakingChanges)) {
+            String content = "BREAKING CHANGE: " + breakingChanges;
             builder
                     .append(System.lineSeparator())
                     .append(System.lineSeparator())
-                    .append(WordUtils.wrap("BREAKING CHANGE: " + breakingChanges, MAX_LINE_LENGTH));
+                    .append(wrapText ? WordUtils.wrap(content, MAX_LINE_LENGTH) : content);
         }
 
         if (isNotBlank(closedIssues)) {

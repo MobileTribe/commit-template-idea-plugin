@@ -11,7 +11,7 @@ public class CommitMessageTest {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FIX, "ngStyle",
                 "skip setting empty value when new style has the property",
                 "Previously, all the properties in oldStyles are set to empty value once. Using AngularJS with jQuery 3.3.1, this disables the CSS transition as reported in jquery/jquery#4185.",
-                null, "#16709");
+                null, "#16709", true);
         String expected = "fix(ngStyle): skip setting empty value when new style has the property\n" +
                 "\n" +
                 "Previously, all the properties in oldStyles are set to empty value once.\n" +
@@ -25,7 +25,7 @@ public class CommitMessageTest {
     @Test
     public void testFormatCommit_withoutScope() {
         CommitMessage commitMessage = new CommitMessage(ChangeType.STYLE, null,
-                "fix eslint error", null, null, "");
+                "fix eslint error", null, null, "", true);
         String expected = "style: fix eslint error";
         check(commitMessage, expected);
     }
@@ -35,7 +35,7 @@ public class CommitMessageTest {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "$route",
                 "add support for the `reloadOnUrl` configuration option",
                 "Enables users to specify that a particular route should not be reloaded after a URL change.",
-                "", "#7925,#15002");
+                "", "#7925,#15002", true);
         String expected = "feat($route): add support for the `reloadOnUrl` configuration option\n" +
                 "\n" +
                 "Enables users to specify that a particular route should not be reloaded\n" +
@@ -49,7 +49,7 @@ public class CommitMessageTest {
     @Test
     public void testFormatCommit_withLongBreakingChange() {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, null, "break everything", null,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "");
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "", true);
         String expected = "feat: break everything\n" +
                 "\n" +
                 "BREAKING CHANGE: Lorem ipsum dolor sit amet, consectetur adipiscing\n" +
@@ -73,13 +73,23 @@ public class CommitMessageTest {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "$route",
                 "add support for the `reloadOnUrl` configuration option",
                 "",
-                "", "7925, #15002 , https://github.com/o/r/issues/15003 ");
+                "", "7925, #15002 , https://github.com/o/r/issues/15003 ", true);
         String expected = "feat($route): add support for the `reloadOnUrl` configuration option\n" +
                 "\n" +
                 "Closes #7925\n" +
                 "Closes #15002\n" +
                 "Closes https://github.com/o/r/issues/15003";
         assertEquals(expected, commitMessage.toString());
+    }
+
+    @Test
+    public void testFormatCommit_noWrap() {
+        CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, null, "break everything", null,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "", false);
+        String expected = "feat: break everything\n" +
+                "\n" +
+                "BREAKING CHANGE: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        check(commitMessage, expected);
     }
 
     private void check(CommitMessage commitMessage, String output) {
