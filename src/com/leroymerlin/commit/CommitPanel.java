@@ -1,7 +1,6 @@
 package com.leroymerlin.commit;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VfsUtil;
 
 import javax.swing.*;
 import java.io.File;
@@ -33,7 +32,7 @@ public class CommitPanel {
     private ButtonGroup changeTypeGroup;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
-        File workingDirectory = VfsUtil.virtualToIoFile(project.getBaseDir());
+        File workingDirectory = new File(project.getBasePath());
         GitLogQuery.Result result = new GitLogQuery(workingDirectory).execute();
         if (result.isSuccess()) {
             changeScope.addItem(""); // no value by default

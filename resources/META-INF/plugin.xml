@@ -29,7 +29,7 @@
         <action id="Commit.Button" class="com.leroymerlin.commit.CreateCommitAction"
                 text="Create commit message"
                 description="Create commit message"
-                icon="PluginIcons.LOAD">
+                icon="/icons/load.png">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
         </action>
     </actions>
