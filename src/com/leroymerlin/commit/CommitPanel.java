@@ -5,13 +5,13 @@ import com.intellij.openapi.vfs.VfsUtil;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.Enumeration;
 
 /**
  * @author Damien Arrachequesne
  */
 public class CommitPanel {
     private JPanel mainPanel;
-    private JComboBox<ChangeType> changeType;
     private JComboBox<String> changeScope;
     private JTextField shortDescription;
     private JTextArea longDescription;
@@ -19,11 +19,20 @@ public class CommitPanel {
     private JTextField closedIssues;
     private JCheckBox wrapTextCheckBox;
     private JCheckBox skipCICheckBox;
+    private JRadioButton featRadioButton;
+    private JRadioButton fixRadioButton;
+    private JRadioButton docsRadioButton;
+    private JRadioButton styleRadioButton;
+    private JRadioButton refactorRadioButton;
+    private JRadioButton perfRadioButton;
+    private JRadioButton testRadioButton;
+    private JRadioButton buildRadioButton;
+    private JRadioButton ciRadioButton;
+    private JRadioButton choreRadioButton;
+    private JRadioButton revertRadioButton;
+    private ButtonGroup changeTypeGroup;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
-        for (ChangeType type : ChangeType.values()) {
-            changeType.addItem(type);
-        }
         File workingDirectory = VfsUtil.virtualToIoFile(project.getBaseDir());
         GitLogQuery.Result result = new GitLogQuery(workingDirectory).execute();
         if (result.isSuccess()) {
@@ -42,7 +51,7 @@ public class CommitPanel {
 
     CommitMessage getCommitMessage() {
         return new CommitMessage(
-                (ChangeType) changeType.getSelectedItem(),
+                getSelectedChangeType(),
                 (String) changeScope.getSelectedItem(),
                 shortDescription.getText().trim(),
                 longDescription.getText().trim(),
@@ -53,8 +62,27 @@ public class CommitPanel {
         );
     }
 
+    private ChangeType getSelectedChangeType() {
+        for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return ChangeType.valueOf(button.getActionCommand().toUpperCase());
+            }
+        }
+        return null;
+    }
+
     private void restoreValuesFromParsedCommitMessage(CommitMessage commitMessage) {
-        changeType.setSelectedItem(commitMessage.getChangeType());
+        if (commitMessage.getChangeType() != null) {
+            for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
+                AbstractButton button = buttons.nextElement();
+
+                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getChangeType().label())) {
+                    button.setSelected(true);
+                }
+            }
+        }
         changeScope.setSelectedItem(commitMessage.getChangeScope());
         shortDescription.setText(commitMessage.getShortDescription());
         longDescription.setText(commitMessage.getLongDescription());
