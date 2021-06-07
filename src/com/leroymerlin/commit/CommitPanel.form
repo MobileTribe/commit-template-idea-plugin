@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.leroymerlin.commit.CommitPanel">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="9" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="974" height="621"/>
+      <xy x="20" y="20" width="974" height="655"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -13,20 +13,20 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Type of change"/>
+          <text resource-bundle="i18n/panel" key="type.of.change"/>
         </properties>
       </component>
       <component id="b0ac4" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Scope of this change"/>
+          <text resource-bundle="i18n/panel" key="scope.of.this.change"/>
         </properties>
       </component>
       <component id="549f7" class="javax.swing.JComboBox" binding="changeScope">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -36,16 +36,16 @@
       </component>
       <component id="19a59" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <horizontalTextPosition value="2"/>
-          <text value="Short description"/>
+          <text resource-bundle="i18n/panel" key="short.description"/>
         </properties>
       </component>
       <component id="92216" class="javax.swing.JTextField" binding="shortDescription">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -53,15 +53,15 @@
       </component>
       <component id="a5d3c" class="javax.swing.JLabel">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Long description"/>
+          <text resource-bundle="i18n/panel" key="long.description"/>
         </properties>
       </component>
       <component id="32600" class="javax.swing.JTextArea" binding="longDescription">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="100"/>
           </grid>
         </constraints>
@@ -71,16 +71,16 @@
       </component>
       <component id="83b17" class="javax.swing.JLabel">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Closed issues"/>
-          <toolTipText value="Comma-separated list of issues which are closed by this commit"/>
+          <text resource-bundle="i18n/panel" key="closed.issues"/>
+          <toolTipText resource-bundle="i18n/panel" key="closed.issues.description"/>
         </properties>
       </component>
       <component id="73448" class="javax.swing.JTextField" binding="closedIssues">
         <constraints>
-          <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -88,15 +88,15 @@
       </component>
       <component id="c313a" class="javax.swing.JLabel">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Breaking changes"/>
+          <text resource-bundle="i18n/panel" key="breaking.changes"/>
         </properties>
       </component>
       <component id="15a33" class="javax.swing.JTextArea" binding="breakingChanges">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
@@ -106,21 +106,21 @@
       </component>
       <component id="fa59e" class="javax.swing.JCheckBox" binding="wrapTextCheckBox">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <actionCommand value="Wrap text at 72 characters?"/>
+          <actionCommand resource-bundle="i18n/panel" key="wrap.at.72.characters"/>
           <autoscrolls value="false"/>
           <selected value="true"/>
-          <text value="Wrap at 72 characters?"/>
+          <text resource-bundle="i18n/panel" key="wrap.at.72.characters"/>
         </properties>
       </component>
       <component id="da505" class="javax.swing.JCheckBox" binding="skipCICheckBox" default-binding="true">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Skip CI?"/>
+          <text resource-bundle="i18n/panel" key="skip.ci"/>
         </properties>
       </component>
       <grid id="1360f" layout-manager="GridLayoutManager" row-count="11" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -138,7 +138,7 @@
             <properties>
               <actionCommand value="feat"/>
               <selected value="true"/>
-              <text value="feat - A new feature"/>
+              <text resource-bundle="i18n/panel" key="feat.description"/>
             </properties>
           </component>
           <hspacer id="ae76c">
@@ -153,7 +153,7 @@
             <properties>
               <actionCommand value="fix"/>
               <selected value="false"/>
-              <text value="fix - A bug fix"/>
+              <text resource-bundle="i18n/panel" key="fix.description"/>
             </properties>
           </component>
           <component id="48d9a" class="javax.swing.JRadioButton" binding="docsRadioButton">
@@ -162,7 +162,7 @@
             </constraints>
             <properties>
               <actionCommand value="docs"/>
-              <text value="docs - Documentation only changes"/>
+              <text resource-bundle="i18n/panel" key="docs.description"/>
             </properties>
           </component>
           <component id="621d2" class="javax.swing.JRadioButton" binding="styleRadioButton">
@@ -171,7 +171,7 @@
             </constraints>
             <properties>
               <actionCommand value="style"/>
-              <text value="style - Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"/>
+              <text resource-bundle="i18n/panel" key="style.description"/>
             </properties>
           </component>
           <component id="7d0c5" class="javax.swing.JRadioButton" binding="refactorRadioButton">
@@ -180,7 +180,7 @@
             </constraints>
             <properties>
               <actionCommand value="refactor"/>
-              <text value="refactor - A code change that neither fixes a bug nor adds a feature"/>
+              <text resource-bundle="i18n/panel" key="refactor.description"/>
             </properties>
           </component>
           <component id="1325a" class="javax.swing.JRadioButton" binding="perfRadioButton">
@@ -190,7 +190,7 @@
             <properties>
               <actionCommand value="perf"/>
               <selected value="false"/>
-              <text value="perf - A code change that improves performance"/>
+              <text resource-bundle="i18n/panel" key="perf.description"/>
             </properties>
           </component>
           <component id="c1b37" class="javax.swing.JRadioButton" binding="testRadioButton">
@@ -199,7 +199,7 @@
             </constraints>
             <properties>
               <actionCommand value="test"/>
-              <text value="test - Adding missing tests or correcting existing tests"/>
+              <text resource-bundle="i18n/panel" key="test.description"/>
             </properties>
           </component>
           <component id="5ced0" class="javax.swing.JRadioButton" binding="buildRadioButton">
@@ -208,7 +208,7 @@
             </constraints>
             <properties>
               <actionCommand value="build"/>
-              <text value="build - Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)"/>
+              <text resource-bundle="i18n/panel" key="build.description"/>
             </properties>
           </component>
           <component id="d4c37" class="javax.swing.JRadioButton" binding="ciRadioButton">
@@ -217,7 +217,7 @@
             </constraints>
             <properties>
               <actionCommand value="ci"/>
-              <text value="ci - Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)"/>
+              <text resource-bundle="i18n/panel" key="ci.description"/>
             </properties>
           </component>
           <component id="9b279" class="javax.swing.JRadioButton" binding="choreRadioButton">
@@ -226,7 +226,7 @@
             </constraints>
             <properties>
               <actionCommand value="chore"/>
-              <text value="chore - Other changes that don't modify src or test files"/>
+              <text resource-bundle="i18n/panel" key="chore.description"/>
             </properties>
           </component>
           <component id="3f8cc" class="javax.swing.JRadioButton" binding="revertRadioButton">
@@ -235,11 +235,20 @@
             </constraints>
             <properties>
               <actionCommand value="revert"/>
-              <text value="revert - Reverts a previous commit"/>
+              <text resource-bundle="i18n/panel" key="revert.description"/>
             </properties>
           </component>
         </children>
       </grid>
+      <component id="17079" class="javax.swing.JCheckBox" binding="english">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="English?"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>

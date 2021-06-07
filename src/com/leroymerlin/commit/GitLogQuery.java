@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 
 class GitLogQuery {
     private static final String GIT_LOG_COMMAND = "git log --all --format=%s";
-    private static final Pattern COMMIT_FIRST_LINE_FORMAT = Pattern.compile("^[a-z]+\\((.+)\\):.*");
+    private static final Pattern COMMIT_FIRST_LINE_FORMAT = Pattern.compile("^.+\\((.+)\\):.*");
 
     private final File workingDirectory;
 

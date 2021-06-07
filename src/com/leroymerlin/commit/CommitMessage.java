@@ -14,10 +14,11 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 class CommitMessage {
     private static final int MAX_LINE_LENGTH = 72; // https://stackoverflow.com/a/2120040/5138796
 
-    public static final Pattern COMMIT_FIRST_LINE_FORMAT = Pattern.compile("^([a-z]+)(\\((.+)\\))?: (.+)");
+    public static final Pattern COMMIT_FIRST_LINE_FORMAT = Pattern.compile("^(.+?)(\\((.+)\\))?: (.+)");
     public static final Pattern COMMIT_CLOSES_FORMAT = Pattern.compile("Closes (.+)");
 
     private ChangeType changeType;
+    private boolean english = true;
     private String changeScope, shortDescription, longDescription, breakingChanges, closedIssues;
     private boolean wrapText = true;
     private boolean skipCI = false;
@@ -28,9 +29,10 @@ class CommitMessage {
         this.closedIssues = "";
     }
 
-    public CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription,
+    public CommitMessage(ChangeType changeType, boolean english, String changeScope, String shortDescription, String longDescription,
                          String breakingChanges, String closedIssues, boolean wrapText, boolean skipCI) {
         this.changeType = changeType;
+        this.english = english;
         this.changeScope = changeScope;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
@@ -43,7 +45,7 @@ class CommitMessage {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(changeType.label());
+        builder.append(changeType.label(english));
         if (isNotBlank(changeScope)) {
             builder
                     .append('(')
@@ -101,7 +103,7 @@ class CommitMessage {
             Matcher matcher = COMMIT_FIRST_LINE_FORMAT.matcher(message);
             if (!matcher.find()) return commitMessage;
 
-            commitMessage.changeType = ChangeType.valueOf(matcher.group(1).toUpperCase());
+            commitMessage.changeType = ChangeType.lookup(matcher.group(1));
             commitMessage.changeScope = matcher.group(3);
             commitMessage.shortDescription = matcher.group(4);
 
@@ -167,5 +169,9 @@ class CommitMessage {
 
     public boolean isSkipCI() {
         return skipCI;
+    }
+
+    public boolean isEnglish() {
+        return english;
     }
 }

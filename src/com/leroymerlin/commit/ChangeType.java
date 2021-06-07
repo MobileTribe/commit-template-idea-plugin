@@ -7,32 +7,45 @@ package com.leroymerlin.commit;
  */
 public enum ChangeType {
 
-    FEAT("Features", "A new feature"),
-    FIX("Bug Fixes", "A bug fix"),
-    DOCS("Documentation", "Documentation only changes"),
-    STYLE("Styles", "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)"),
-    REFACTOR("Code Refactoring", "A code change that neither fixes a bug nor adds a feature"),
-    PERF("Performance Improvements", "A code change that improves performance"),
-    TEST("Tests", "Adding missing tests or correcting existing tests"),
-    BUILD("Builds", "Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)"),
-    CI("Continuous Integrations", "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)"),
-    CHORE("Chores", "Other changes that don't modify src or test files"),
-    REVERT("Reverts", "Reverts a previous commit");
+    FEAT("feat", ""),
+    FIX("fix", ""),
+    DOCS("docs", ""),
+    STYLE("style", ""),
+    REFACTOR("refactor", ""),
+    PERF("perf", ""),
+    TEST("test", ""),
+    BUILD("build", ""),
+    CI("ci", ""),
+    CHORE("chore", ""),
+    REVERT("revert", "");
 
-    public final String title;
-    public final String description;
+    private final String title;
+    private String i18n;
 
-    ChangeType(String title, String description) {
+    ChangeType(String title, String i18n) {
         this.title = title;
-        this.description = description;
+        this.i18n = i18n;
     }
 
-    public String label() {
-        return this.name().toLowerCase();
+    public void setI18n(String i18n) {
+        this.i18n = i18n;
+    }
+
+    public String label(boolean english) {
+        return english ? title : i18n;
+    }
+
+    public static ChangeType lookup(String value) {
+        for (ChangeType type : ChangeType.values()) {
+            if (type.title.equalsIgnoreCase(value) || type.i18n.equals(value)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("ChangeType not found: " + value);
     }
 
     @Override
     public String toString() {
-        return String.format("%s - %s", this.label(), this.description);
+        return String.format("%s - %s", this.name(), this.title);
     }
 }

@@ -8,15 +8,25 @@ import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.CommitMessageI;
 import com.intellij.openapi.vcs.VcsDataKeys;
 import com.intellij.openapi.vcs.ui.Refreshable;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ResourceBundle;
 
 /**
  * @author Damien Arrachequesne
  */
 public class CreateCommitAction extends AnAction implements DumbAware {
 
+    static {
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n/panel");
+        for (ChangeType type : ChangeType.values()) {
+            type.setI18n(bundle.getString(type.name()));
+        }
+    }
+
     @Override
-    public void actionPerformed(AnActionEvent actionEvent) {
+    public void actionPerformed(@NotNull AnActionEvent actionEvent) {
         CommitMessageI commitPanel = getCommitPanel(actionEvent);
         if (commitPanel == null) return;
 

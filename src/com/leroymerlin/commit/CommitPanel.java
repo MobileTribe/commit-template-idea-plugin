@@ -30,6 +30,7 @@ public class CommitPanel {
     private JRadioButton choreRadioButton;
     private JRadioButton revertRadioButton;
     private ButtonGroup changeTypeGroup;
+    private JCheckBox english;
 
     CommitPanel(Project project, CommitMessage commitMessage) {
         File workingDirectory = new File(project.getBasePath());
@@ -51,6 +52,7 @@ public class CommitPanel {
     CommitMessage getCommitMessage() {
         return new CommitMessage(
                 getSelectedChangeType(),
+                english.isSelected(),
                 (String) changeScope.getSelectedItem(),
                 shortDescription.getText().trim(),
                 longDescription.getText().trim(),
@@ -77,7 +79,7 @@ public class CommitPanel {
             for (Enumeration<AbstractButton> buttons = changeTypeGroup.getElements(); buttons.hasMoreElements();) {
                 AbstractButton button = buttons.nextElement();
 
-                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getChangeType().label())) {
+                if (button.getActionCommand().equalsIgnoreCase(commitMessage.getChangeType().name())) {
                     button.setSelected(true);
                 }
             }
@@ -88,5 +90,6 @@ public class CommitPanel {
         breakingChanges.setText(commitMessage.getBreakingChanges());
         closedIssues.setText(commitMessage.getClosedIssues());
         skipCICheckBox.setSelected(commitMessage.isSkipCI());
+        english.setSelected(commitMessage.isEnglish());
     }
 }
